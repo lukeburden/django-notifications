@@ -13,6 +13,12 @@ def notifications_unread(context):
         return ''
     return user.notifications.unread().count()
 
+@register.assignment_tag(takes_context=True)
+def notifications_unseen(context):
+    user = user_context(context)
+    if not user:
+        return ''
+    return user.notifications.unseen().count()
 
 # Requires vanilla-js framework - http://vanilla-js.com/
 @register.simple_tag
