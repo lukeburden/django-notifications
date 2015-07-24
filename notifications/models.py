@@ -70,6 +70,16 @@ class NotificationQuerySet(models.query.QuerySet):
             """
             return self.filter(unread=False)
 
+    def unseen(self):
+        """Return only unseen items in the current queryset"""
+        if is_soft_delete():
+            return self.filter(unseen=True, deleted=False)
+        else:
+            """ when SOFT_DELETE=False, developers are supposed NOT to touch 'deleted' field.
+            In this case, to improve query performance, don't filter by 'deleted' field
+            """
+            return self.filter(unseen=True)
+
     def mark_all_as_read(self, recipient=None):
         """Mark as read any unread messages in the current queryset.
 
@@ -162,6 +172,7 @@ class Notification(models.Model):
 
     recipient = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, related_name='notifications')
     unread = models.BooleanField(default=True, blank=False)
+    unseen = models.BooleanField(default=True, blank=False)
 
     actor_content_type = models.ForeignKey(ContentType, related_name='notify_actor')
     actor_object_id = models.CharField(max_length=255)
