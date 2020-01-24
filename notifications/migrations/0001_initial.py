@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.db import models, migrations
 import django.utils.timezone
 from django.conf import settings
@@ -21,7 +18,7 @@ class Migration(migrations.Migration):
                 ('level', models.CharField(default='info', max_length=20, choices=[('success', 'success'), ('info', 'info'), ('warning', 'warning'), ('error', 'error')])),
                 ('unread', models.BooleanField(default=True)),
                 ('actor_object_id', models.CharField(max_length=255)),
-                ('ver', models.CharField(max_length=255)),
+                ('verb', models.CharField(max_length=255)),
                 ('description', models.TextField(null=True, blank=True)),
                 ('target_object_id', models.CharField(max_length=255, null=True, blank=True)),
                 ('action_object_object_id', models.CharField(max_length=255, null=True, blank=True)),
