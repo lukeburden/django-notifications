@@ -8,4 +8,5 @@ class NotificationAdmin(admin.ModelAdmin):
                     'level', 'target', 'unread', 'public')
     list_filter = ('level', 'unread', 'public', 'timestamp', )
 
-admin.site.register(Notification, NotificationAdmin)
+# Luke: we do not want this registered 
+#admin.site.register(Notification, NotificationAdmin)
